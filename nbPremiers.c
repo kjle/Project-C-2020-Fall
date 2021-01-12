@@ -1,30 +1,25 @@
 /* Ce module définit les fonctions de Erastosthène.
- * Ce programme pour touver les premiers par une méthode de Erastosthène.
  * 
- * @author : KANG Jiale "kanngjle@gmail.com" et ZHANG Liyun ""
+ * @author : KANG Jiale "kanngjle@gmail.com" et ZHANG Liyun "leo.zhangliyun@stu.xidian.edu.cn"
  * Creation @date : 03-Dec-2020 10:21
- * Last file update : 03-Dec-2020 11:31
+ * Last file update : 12-Jan-2021 21:42
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXNUM 10000 + 5
-// MAXNUM : Ce programme peut trouver les numéro de 1 à MAXNUM.
-// MAXNUM : 程序能找到的最大范围是1到MAXNUM。
+/* MAXNUM : Ce programme peut trouver les numéro de 1 à MAXNUM. */
+
+#define CAPACITEMAX 1000
+typedef int ensemble[CAPACITEMAX];
 
 /*
  * Rôle : Initialise le ensemble.
  * ens[i] = 0 : i n'est pas premier
  * ens[i] = 1 : i est premier
  * ens[0] = ens[1] = 0. (Parce que 0 et 1 ne sont pas premiers.)
- *
- * 作用 : 初始化一个集合。
- * ens[i] = 0 : 数字i不再素数集合中，即数字i不是素数。
- * ens[i] = 1 : 数字i在素数集合中，即数字i是素数。
- * ens[0] = ens[1] = 0.(因为0和1均不是素数。)
  */
-void init_crible(int n, int ens[MAXNUM])
+void init_crible(int n, ensemble ens)
 {
     for (int i = 2; i <= n; i++)
     {
@@ -36,15 +31,11 @@ void init_crible(int n, int ens[MAXNUM])
 }
 
 /*
- * Rôle : Trouve les premiers de 2 à n - 1.
+ * Rôle : Trouve les premiers de 2 à n-1.
  * Si i est premier, k*i ne sont pas premiers. (k = 2, 3, …)
  * On l'enlève du ens(crible) ainsi que tous ses multiples.
- *
- * 作用 : 在2到(n - 1)内找到素数。
- * 如果i是素数，k*i便不是素数。
- * 从集合中删除i的倍数。
  */
-void trouver_premiers(int n, int ens[MAXNUM])
+void trouver_premiers(int n, ensemble ens)
 {
     for (int i = 2; i <= n; i++)
     {
@@ -61,9 +52,8 @@ void trouver_premiers(int n, int ens[MAXNUM])
 
 /*
  * Rôle : Ecrit sur la sortie standard le table de premires. (colonne est 5)
- * 作用 : 输出素数。(每行输出5个素数。)
  */
-void print_premiers(int n, int ens[MAXNUM])
+void print_premiers(int n, ensemble ens)
 {
     int col = 0;
     for (int i = 2; i <= n; i++)
@@ -83,20 +73,16 @@ void print_premiers(int n, int ens[MAXNUM])
 /**************************************************************
  *                 le programme principal                     *
  **************************************************************/
+
 int main(void)
 {
     int n;
-    int crible[MAXNUM];
+    ensemble crible;
 /*
  * n : le maximal numéro
  * crible : juge si le numéro est premier
  * crible[i] = 0 : i n'est pas premier
  * crible[i] = 1 : i est premier
- *
- * n : 最大数。
- * crible : 表示数字是否是素数的集合。
- * crible[i] = 0 : i不是素数。
- * crible[i] = 1 : i是素数。
  */
 
     scanf("%d", &n);
